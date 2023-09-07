@@ -30,6 +30,12 @@ MainWindow::MainWindow(QWidget *parent)
         }
     }
 
+    connect(msocket,&QUdpSocket::readyRead,this,[this](){
+        char str[1024] = {0};
+        msocket->readDatagram(str,sizeof str);
+        ui->ReceivetextEdit->append(str);
+    });
+
 
 }
 
@@ -58,5 +64,15 @@ void MainWindow::on_BindBtn_clicked()
         QMessageBox::information(this,"提示","绑定失败！");
     }
 
+}
+
+
+void MainWindow::on_SendBtn_clicked()
+{
+    int Aimport = ui->UdpPORTlineEdit->text().toInt();
+    QString Aimip = ui->UdpIPlineEdit->text();
+    QString sendText = ui->SendtextEdit->toPlainText();
+
+    msocket->writeDatagram(sendText.toUtf8(),QHostAddress(Aimip),Aimport);
 }
 

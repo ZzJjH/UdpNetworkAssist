@@ -67,6 +67,98 @@
      </item>
     </layout>
    </widget>
+   <widget class="QGroupBox" name="groupBox_2">
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>10</y>
+      <width>501</width>
+      <height>511</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>网络数据接收</string>
+    </property>
+    <widget class="QTextEdit" name="ReceivetextEdit">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>20</y>
+       <width>481</width>
+       <height>401</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QTextEdit" name="SendtextEdit">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>470</y>
+       <width>361</width>
+       <height>41</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="SendBtn">
+     <property name="geometry">
+      <rect>
+       <x>390</x>
+       <y>480</y>
+       <width>75</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>发送</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_4">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>440</y>
+       <width>71</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>目标IP地址：</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="UdpIPlineEdit">
+     <property name="geometry">
+      <rect>
+       <x>100</x>
+       <y>440</y>
+       <width>113</width>
+       <height>21</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_5">
+     <property name="geometry">
+      <rect>
+       <x>240</x>
+       <y>440</y>
+       <width>71</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>目标端口号：</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="UdpPORTlineEdit">
+     <property name="geometry">
+      <rect>
+       <x>320</x>
+       <y>440</y>
+       <width>113</width>
+       <height>21</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

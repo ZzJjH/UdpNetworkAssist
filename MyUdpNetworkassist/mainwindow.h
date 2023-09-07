@@ -19,6 +19,8 @@ public:
 private slots:
     void on_BindBtn_clicked();
 
+    void on_SendBtn_clicked();
+
 private:
     Ui::MainWindow *ui;
     QUdpSocket* msocket;

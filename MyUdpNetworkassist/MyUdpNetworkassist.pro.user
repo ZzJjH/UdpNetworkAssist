@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 11.0.2, 2023-09-07T22:40:18. -->
+<!-- Written by QtCreator 11.0.2, 2023-09-07T23:00:10. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -83,7 +83,7 @@
     <value type="bool" key="ClangTools.UseGlobalSettings">true</value>
    </valuemap>
    <valuemap type="QVariantMap" key="ClangdSettings">
-    <value type="bool" key="blockIndexing">true</value>
+    <value type="bool" key="blockIndexing">false</value>
     <value type="bool" key="useGlobalSettings">true</value>
    </valuemap>
   </valuemap>
@@ -242,8 +242,9 @@
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="bool" key="PE.EnvironmentAspect.PrintOnRun">false</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:E:/QTproject/QTonline/MyUdpNetworkassist/MyUdpNetworkassist.pro</value>
-    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">E:/QTproject/QTonline/MyUdpNetworkassist/MyUdpNetworkassist.pro</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">MyUdpNetworkassist2</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:E:/QTproject/QTonline/9.7UDP/MyNetworkAssist/MyUdpNetworkassist/MyUdpNetworkassist.pro</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">E:/QTproject/QTonline/9.7UDP/MyNetworkAssist/MyUdpNetworkassist/MyUdpNetworkassist.pro</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
     <value type="bool" key="RunConfiguration.UseLibrarySearchPath">true</value>
     <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
