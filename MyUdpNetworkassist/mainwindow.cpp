@@ -2,7 +2,7 @@
 #include "ui_mainwindow.h"
 
 #include<QMessageBox>
-
+#
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -30,12 +30,14 @@ MainWindow::MainWindow(QWidget *parent)
         }
     }
 
-    connect(msocket,&QUdpSocket::readyRead,this,[this](){
-        char str[1024] = {0};
-        msocket->readDatagram(str,sizeof str);
-        ui->ReceivetextEdit->append(str);
-    });
+    //接收信息1
+//    connect(msocket,&QUdpSocket::readyRead,this,[this](){
+//        char str[1024] = {0};
+//        msocket->readDatagram(str,sizeof str);
+//        ui->ReceivetextEdit->append(str);
+//    });
 
+    connect(msocket,&QUdpSocket::readyRead,this,&MainWindow::readyRead_Slot);
 
 }
 
@@ -74,5 +76,27 @@ void MainWindow::on_SendBtn_clicked()
     QString sendText = ui->SendtextEdit->toPlainText();
 
     msocket->writeDatagram(sendText.toUtf8(),QHostAddress(Aimip),Aimport);
+}
+
+void MainWindow::readyRead_Slot()
+{
+    while(msocket->hasPendingDatagrams())
+    {
+        QByteArray datagram;
+        datagram.resize(msocket->pendingDatagramSize());
+
+        msocket->readDatagram(datagram.data(),datagram.size());
+
+        QString buf;
+        buf = QString::fromUtf8(datagram); // 使用正确的编码方式
+
+        QDateTime currentTime = QDateTime::currentDateTime();
+        QString Time = currentTime.toString("yyyy-MM-dd HH:mm:ss");
+
+        QString rece = QString("%1: %2").arg(Time).arg(buf);
+
+        ui->ReceiveplainTextEdit->appendPlainText(rece);
+
+    }
 }
 

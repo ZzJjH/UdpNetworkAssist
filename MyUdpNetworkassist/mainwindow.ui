@@ -79,7 +79,7 @@
     <property name="title">
      <string>网络数据接收</string>
     </property>
-    <widget class="QTextEdit" name="ReceivetextEdit">
+    <widget class="QPlainTextEdit" name="ReceiveplainTextEdit">
      <property name="geometry">
       <rect>
        <x>10</x>
