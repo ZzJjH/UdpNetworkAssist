@@ -88,6 +88,9 @@
        <height>401</height>
       </rect>
      </property>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
     </widget>
     <widget class="QTextEdit" name="SendtextEdit">
      <property name="geometry">

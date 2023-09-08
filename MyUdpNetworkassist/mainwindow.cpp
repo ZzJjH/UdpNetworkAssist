@@ -2,7 +2,7 @@
 #include "ui_mainwindow.h"
 
 #include<QMessageBox>
-#
+#include<QDebug>
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -80,20 +80,32 @@ void MainWindow::on_SendBtn_clicked()
 
 void MainWindow::readyRead_Slot()
 {
+    QHostAddress AimIP;
+    quint16 AimPort;
     while(msocket->hasPendingDatagrams())
     {
         QByteArray datagram;
         datagram.resize(msocket->pendingDatagramSize());
 
-        msocket->readDatagram(datagram.data(),datagram.size());
+        msocket->readDatagram(datagram.data(),datagram.size(),&AimIP,&AimPort);
 
         QString buf;
         buf = QString::fromUtf8(datagram); // 使用正确的编码方式
 
         QDateTime currentTime = QDateTime::currentDateTime();
         QString Time = currentTime.toString("yyyy-MM-dd HH:mm:ss");
+        //qDebug()<<"666"<<AimIP.toString()<<"666"<<QString::number(AimPort, 10);
+        //666 "::ffff:192.168.137.1" 666 "56050"
+        // 找到最后一个冒号的位置
+        qDebug()<<"666"<<AimIP.toString()<<"666"<<QString::number(AimPort, 10);
+        int lastColonIndex = AimIP.toString().lastIndexOf(':');// 提取冒号后面的部分
+        QString ipAddress = AimIP.toString().mid(lastColonIndex + 1);
 
-        QString rece = QString("%1: %2").arg(Time).arg(buf);
+        QString rece = QString("Receive from[%1,%2](%3)：\n%4")
+                           .arg(ipAddress)
+                           .arg(QString::number(AimPort, 10))
+                           .arg(Time)
+                           .arg(buf);
 
         ui->ReceiveplainTextEdit->appendPlainText(rece);
 
