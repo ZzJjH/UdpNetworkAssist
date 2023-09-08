@@ -68,7 +68,9 @@ void MainWindow::on_BindBtn_clicked()
 
 }
 
+/*********************************************************************************************/
 
+/*发送数据*/
 void MainWindow::on_SendBtn_clicked()
 {
     int Aimport = ui->UdpPORTlineEdit->text().toInt();
@@ -78,29 +80,41 @@ void MainWindow::on_SendBtn_clicked()
     msocket->writeDatagram(sendText.toUtf8(),QHostAddress(Aimip),Aimport);
 }
 
+/**************************************************************************************/
+
+/*接收信息槽函数*/
+//Receive from[IP,端口号](时间)：
+//接收内容
 void MainWindow::readyRead_Slot()
 {
+    //接收发送者的IP和端口号
     QHostAddress AimIP;
     quint16 AimPort;
+
+
     while(msocket->hasPendingDatagrams())
     {
         QByteArray datagram;
         datagram.resize(msocket->pendingDatagramSize());
 
+        //读取接收信息，IP和端口号
         msocket->readDatagram(datagram.data(),datagram.size(),&AimIP,&AimPort);
 
+        //转化为可显示文本
         QString buf;
         buf = QString::fromUtf8(datagram); // 使用正确的编码方式
 
+        //获取当前时间并转化为固定格式 (年-月-日 小时:分钟:秒)
         QDateTime currentTime = QDateTime::currentDateTime();
         QString Time = currentTime.toString("yyyy-MM-dd HH:mm:ss");
+
         //qDebug()<<"666"<<AimIP.toString()<<"666"<<QString::number(AimPort, 10);
         //666 "::ffff:192.168.137.1" 666 "56050"
         // 找到最后一个冒号的位置
-        qDebug()<<"666"<<AimIP.toString()<<"666"<<QString::number(AimPort, 10);
         int lastColonIndex = AimIP.toString().lastIndexOf(':');// 提取冒号后面的部分
         QString ipAddress = AimIP.toString().mid(lastColonIndex + 1);
 
+       //拼接显示的文本
         QString rece = QString("Receive from[%1,%2](%3)：\n%4")
                            .arg(ipAddress)
                            .arg(QString::number(AimPort, 10))
@@ -109,6 +123,36 @@ void MainWindow::readyRead_Slot()
 
         ui->ReceiveplainTextEdit->appendPlainText(rece);
 
+    }
+}
+
+/**********************************************************************************/
+
+
+void MainWindow::on_saveBtn_clicked()
+{
+    QString currentPath = QDir::currentPath();
+    QString title = "另存为一个文件";
+
+    QString filename = QFileDialog::getSaveFileName(this,tr("将接收的文本数据另存为"),currentPath,tr("*.txt"));
+//        QString fileName = QFileDialog::getSaveFileName(this, tr("Save File"),
+//                                       "/home/jana/untitled.png",
+//                                       tr("Images (*.png *.xpm *.jpg)"));
+    if(filename.isEmpty())
+    {
+        return;
+        //QMessageBox::warning(this,"警告","请选择一个文件");//点取消弹出警告
+    }
+    else
+    {
+        QFile file(filename);
+        file.open(QIODevice::WriteOnly);
+        QString receData = ui->ReceiveplainTextEdit->toPlainText();
+        //QByteArray receData1 = receData.toLatin1();//中文乱码
+        QByteArray receData1 = receData.toUtf8();
+        file.write(receData1);
+        QMessageBox::information(this,"提示","保存成功！");
+        file.close();
     }
 }
 

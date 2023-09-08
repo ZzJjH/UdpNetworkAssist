@@ -5,6 +5,10 @@
 #include<QtNetwork>
 #include <QIntValidator>
 #include <QDateTime>
+#include<QDir>
+#include<QFileDialog>
+#include<QFile>
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -23,6 +27,8 @@ private slots:
     void on_SendBtn_clicked();
 
     void readyRead_Slot();
+
+    void on_saveBtn_clicked();
 
 private:
     Ui::MainWindow *ui;
