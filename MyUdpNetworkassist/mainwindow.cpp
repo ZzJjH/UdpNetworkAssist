@@ -134,7 +134,7 @@ void MainWindow::on_saveBtn_clicked()
     QString currentPath = QDir::currentPath();
     QString title = "另存为一个文件";
 
-    QString filename = QFileDialog::getSaveFileName(this,tr("将接收的文本数据另存为"),currentPath,tr("*.txt"));
+    QString filename = QFileDialog::getSaveFileName(this,tr("将接收的文本数据另存为"),currentPath,tr("*.xlsx"));
 //        QString fileName = QFileDialog::getSaveFileName(this, tr("Save File"),
 //                                       "/home/jana/untitled.png",
 //                                       tr("Images (*.png *.xpm *.jpg)"));
