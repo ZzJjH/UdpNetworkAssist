@@ -18,6 +18,12 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
+    void default_ip_port();
+    void port_bind();
+    void send_message();
+    void recv_message();
+    void save_message();
+
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 

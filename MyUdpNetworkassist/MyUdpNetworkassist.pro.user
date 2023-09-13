@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 11.0.2, 2023-09-13T22:20:25. -->
+<!-- Written by QtCreator 11.0.2, 2023-09-13T23:23:09. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -242,12 +242,12 @@
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="bool" key="PE.EnvironmentAspect.PrintOnRun">false</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">MyUdpNetworkassist2</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:E:/QTproject/QTonline/9.7UDP/MyNetworkAssist/MyUdpNetworkassist/MyUdpNetworkassist.pro</value>
-    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">E:/QTproject/QTonline/9.7UDP/MyNetworkAssist/MyUdpNetworkassist/MyUdpNetworkassist.pro</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:E:/QTproject/QTonline/9.7UDP/MyNetworkAssist/UdpNetworkAssist/MyUdpNetworkassist/MyUdpNetworkassist.pro</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">E:/QTproject/QTonline/9.7UDP/MyNetworkAssist/UdpNetworkAssist/MyUdpNetworkassist/MyUdpNetworkassist.pro</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
     <value type="bool" key="RunConfiguration.UseLibrarySearchPath">true</value>
     <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
+    <value type="QString" key="RunConfiguration.WorkingDirectory.default">E:/QTproject/QTonline/build-MyUdpNetworkassist-Desktop_Qt_5_15_2_MinGW_64_bit-Debug</value>
    </valuemap>
    <value type="qlonglong" key="ProjectExplorer.Target.RunConfigurationCount">1</value>
   </valuemap>
