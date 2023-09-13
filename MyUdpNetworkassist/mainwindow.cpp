@@ -3,40 +3,35 @@
 
 #include<QMessageBox>
 #include<QDebug>
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
 
-    /*创建套接字对象*/
+    /* 创建套接字对象 */
     msocket = new QUdpSocket(this);
 
-    /*本地端口输入限制为数字*/
+    /* 本地端口输入限制为数字 */
     PORTvalidator = new QIntValidator(this);
-    //PORTvalidator->setRange(49152, 65535);
     ui->PortlineEdit->setValidator(PORTvalidator);
 
-    /*获取本地IP地址：
-       1、用QList存储本地所有IP地址
-       2、用for循环遍历所有IP地址，并把本地IP地址显示在主界面。（条件：非 127.0.0.1 、非IPV6)
+    /* 获取本地IP地址并显示：
+        1、用QList存储本地所有IP地址
+        2、用for循环遍历所有IP地址，并把本地IP地址显示在主界面。（条件：非 127.0.0.1 、非IPV6)
     */
     QList<QHostAddress> IPlist = QNetworkInterface::allAddresses();//#include<QtNetwork>
     for(int i = 0; i < IPlist.size(); ++i)
     {
-        if(IPlist.at(i) != QHostAddress::LocalHost && IPlist.at(i).toIPv4Address()) {
+        if(IPlist.at(i) != QHostAddress::LocalHost && IPlist.at(i).toIPv4Address())
+        {
             ui->IPlineEdit->setText(IPlist.at(i).toString());
             break;
         }
     }
 
-    //接收信息1
-//    connect(msocket,&QUdpSocket::readyRead,this,[this](){
-//        char str[1024] = {0};
-//        msocket->readDatagram(str,sizeof str);
-//        ui->ReceivetextEdit->append(str);
-//    });
-
+    /* Udp接收数据 */
     connect(msocket,&QUdpSocket::readyRead,this,&MainWindow::readyRead_Slot);
 
 }
@@ -46,19 +41,17 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-//用户输入端口号后绑定
+/* 用户输入端口号后点击“绑定”按钮 */
 void MainWindow::on_BindBtn_clicked()
 {
     int port = ui->PortlineEdit->text().toInt();
     bool flag = msocket->bind(port);
     if(flag)
     {
-        //绑定成功
+        //绑定成功(“绑定”按钮设置为失效，“端口号”输入框设置为只读)
         ui->BindBtn->setEnabled(false);
         ui->PortlineEdit->setReadOnly(true);
-       // ui->PortlineEdit->setEnabled(false);
         QMessageBox::information(this,"提示","绑定成功！");
-
     }
     else
     {
@@ -70,27 +63,28 @@ void MainWindow::on_BindBtn_clicked()
 
 /*********************************************************************************************/
 
-/*发送数据*/
+/* 发送数据 */
 void MainWindow::on_SendBtn_clicked()
 {
+    // 获取目标端口号，IP，要发送的文本
     int Aimport = ui->UdpPORTlineEdit->text().toInt();
     QString Aimip = ui->UdpIPlineEdit->text();
     QString sendText = ui->SendtextEdit->toPlainText();
 
+    //用utf8编码
     msocket->writeDatagram(sendText.toUtf8(),QHostAddress(Aimip),Aimport);
 }
 
 /**************************************************************************************/
 
-/*接收信息槽函数*/
-//Receive from[IP,端口号](时间)：
-//接收内容
+/* 接收信息槽函数 */
+// Receive from[IP,端口号](时间)：
+// 接收内容
 void MainWindow::readyRead_Slot()
 {
     //接收发送者的IP和端口号
     QHostAddress AimIP;
     quint16 AimPort;
-
 
     while(msocket->hasPendingDatagrams())
     {
@@ -102,7 +96,8 @@ void MainWindow::readyRead_Slot()
 
         //转化为可显示文本
         QString buf;
-        buf = QString::fromUtf8(datagram); // 使用正确的编码方式
+        buf = QString::fromUtf8(datagram); // 用utf8解码
+        qDebug()<<"解码后："<<buf<<"\n";
 
         //获取当前时间并转化为固定格式 (年-月-日 小时:分钟:秒)
         QDateTime currentTime = QDateTime::currentDateTime();
