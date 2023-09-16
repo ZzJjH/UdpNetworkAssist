@@ -21,6 +21,13 @@ MainWindow::MainWindow(QWidget *parent)
     /* Udp接收数据 */
     connect(msocket,&QUdpSocket::readyRead,this,&MainWindow::readyRead_Slot);
 
+    /* 显示接收速率 */
+    mtimer = new QTimer(this);
+    mtimer->start(1000);
+    connect(mtimer,&QTimer::timeout,this,&MainWindow::RecvRate_slot);
+    lastUpdateTime = QDateTime::currentDateTime();
+    lastTotalBytesReceived = totalBytesReceived;
+
 }
 
 MainWindow::~MainWindow()
@@ -60,6 +67,20 @@ void MainWindow::readyRead_Slot()
 void MainWindow::on_saveBtn_clicked()
 {
     save_message();
+}
+
+void MainWindow::RecvRate_slot()
+{
+   QDateTime currentTime = QDateTime::currentDateTime();
+   int timeElapsed = lastUpdateTime.msecsTo(currentTime); // 毫秒为单位
+   qint64 bytesReceivedThisSecond = totalBytesReceived - lastTotalBytesReceived;
+   receiveRate = (double)bytesReceivedThisSecond / (timeElapsed / 1000.0); // 字节每秒
+
+   ui->recv_speed->setText(QString("接收速率: %1 字节/秒").arg(receiveRate));
+
+ // 更新上次更新时间和总接收字节数
+    lastUpdateTime = currentTime;
+    lastTotalBytesReceived = totalBytesReceived;
 }
 
 
@@ -120,7 +141,7 @@ void MainWindow::recv_message()
 {
     //接收发送者的IP和端口号
     QHostAddress AimIP;
-    quint16 AimPort;
+    quint16 AimPort;    //无符号16位整数
 
     while(msocket->hasPendingDatagrams())
     {
@@ -130,13 +151,19 @@ void MainWindow::recv_message()
         //读取接收信息，IP和端口号
         msocket->readDatagram(datagram.data(),datagram.size(),&AimIP,&AimPort);
 
+        // 更新总接收字节数
+        totalBytesReceived += datagram.size();
+
+        // 显示总字节数
+        ui->totalByte->setText(QString("总接收字节数：%1字节").arg(totalBytesReceived));
+
         //转化为可显示文本
         QString buf;
         buf = QString::fromUtf8(datagram); // 用utf8解码
         qDebug()<<"解码后："<<buf<<"\n";
 
-                    //获取当前时间并转化为固定格式 (年-月-日 小时:分钟:秒)
-                    QDateTime currentTime = QDateTime::currentDateTime();
+        //获取当前时间并转化为固定格式 (年-月-日 小时:分钟:秒)
+        QDateTime currentTime = QDateTime::currentDateTime();
         QString Time = currentTime.toString("yyyy-MM-dd HH:mm:ss");
 
         //qDebug()<<"666"<<AimIP.toString()<<"666"<<QString::number(AimPort, 10);
@@ -158,7 +185,7 @@ void MainWindow::recv_message()
 }
 
 void MainWindow::save_message()
-{
+{// Excel默认情况下假定文件采用Windows ANSI编码，而不是UTF-8编码,因此中文会乱码
     QString currentPath = QDir::currentPath();
     QString title = "另存为一个文件";
 
@@ -169,16 +196,14 @@ void MainWindow::save_message()
     if(filename.isEmpty())
     {
         return;
-        //QMessageBox::warning(this,"警告","请选择一个文件");//点取消弹出警告
     }
     else
     {
         QFile file(filename);
-        file.open(QIODevice::WriteOnly);
+        file.open(QIODevice::WriteOnly|QIODevice::Text); // 确保文件以UTF8编码模式打开
         QString receData = ui->ReceiveplainTextEdit->toPlainText();
-        //QByteArray receData1 = receData.toLatin1();//中文乱码
         QByteArray receData1 = receData.toUtf8();
-        file.write(receData1);
+        file.write(receData1,receData1.length());
         QMessageBox::information(this,"提示","保存成功！");
         file.close();
     }
