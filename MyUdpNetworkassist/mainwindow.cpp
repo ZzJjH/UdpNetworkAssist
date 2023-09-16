@@ -166,10 +166,13 @@ void MainWindow::recv_message()
         QString buf;
         buf = QString::fromUtf8(datagram); // 用utf8解码]
 
-        // 要保存的文本
-        save_data.append(buf);
-        save_data += "\n";
-        qDebug()<<"解码后："<<buf<<"\n";
+        // 将接收的文本提取数值并保存在列表中
+        qDebug()<<buf;
+        IMUData imuData = extract_data(buf);
+        qDebug()<<imuData.accx;
+
+
+        //qDebug()<<"解码后："<<buf<<"\n";
 
         //获取当前时间并转化为固定格式 (年-月-日 小时:分钟:秒)
         QDateTime currentTime = QDateTime::currentDateTime();
@@ -216,6 +219,39 @@ void MainWindow::save_message(QString save_data)
         file.close();
     }
 }
+
+MainWindow::IMUData MainWindow::extract_data(const QString& jsonData)
+{
+    IMUData imuData;
+    // 解析JSON数据
+    QJsonParseError jsonError;
+    QJsonDocument jsonDoc = QJsonDocument::fromJson(jsonData.toUtf8(), &jsonError);
+
+    if (!jsonDoc.isNull()) {
+        if (jsonDoc.isObject()) {
+            QJsonObject jsonObj = jsonDoc.object();
+            QJsonValue oValue = jsonObj.value("o");
+            QJsonObject oObject = oValue.toObject();
+
+            imuData.x = oObject.value("x").toString();
+            imuData.y = oObject.value("y").toString();
+            imuData.z = oObject.value("z").toString();
+            imuData.w = oObject.value("w").toString();
+            imuData.accx = oObject.value("accx").toString();
+            imuData.accy = oObject.value("accy").toString();
+            imuData.accz = oObject.value("accz").toString();
+            imuData.gx = oObject.value("gx").toString();
+            imuData.gy = oObject.value("gy").toString();
+            imuData.gz = oObject.value("gz").toString();
+            imuData.s = oObject.value("s").toString();
+            imuData.p = oObject.value("p").toString();
+        }
+    }
+
+    return imuData;
+}
+
+
 
 // 初始化图表
 void MainWindow::initCharts()

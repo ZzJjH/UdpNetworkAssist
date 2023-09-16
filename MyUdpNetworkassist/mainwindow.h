@@ -32,6 +32,23 @@ public:
     void recv_message();
     void save_message(QString save_data);
 
+
+    struct IMUData {
+        QString x;
+        QString y;
+        QString z;
+        QString w;
+        QString accx;
+        QString accy;
+        QString accz;
+        QString gx;
+        QString gy;
+        QString gz;
+        QString s;
+        QString p;
+    };
+    IMUData extract_data(const QString& jsonData);
+
     void initCharts();
     QtCharts::QChartView *chartView;
     QtCharts::QChart *acc_Chart;
