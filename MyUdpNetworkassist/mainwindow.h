@@ -23,7 +23,7 @@ public:
     void port_bind();
     void send_message();
     void recv_message();
-    void save_message();
+    void save_message(QString save_data);
 
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
@@ -50,5 +50,6 @@ private:
     double receiveRate = 0.0; // 接收速率（字节/秒）
     QDateTime lastUpdateTime; // 上次更新时间
     qint64 lastTotalBytesReceived = 0; // 上次总接收字节数
+    QString save_data; // 要保存的数据
 };
 #endif // MAINWINDOW_H

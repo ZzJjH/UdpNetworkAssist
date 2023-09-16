@@ -67,7 +67,7 @@ void MainWindow::readyRead_Slot()
 
 void MainWindow::on_saveBtn_clicked()
 {
-    save_message();
+    save_message(save_data);
 }
 
 void MainWindow::RecvRate_slot()
@@ -147,6 +147,7 @@ void MainWindow::recv_message()
 
     while(msocket->hasPendingDatagrams())
     {
+
         QByteArray datagram;
         datagram.resize(msocket->pendingDatagramSize());
 
@@ -161,7 +162,11 @@ void MainWindow::recv_message()
 
         //转化为可显示文本
         QString buf;
-        buf = QString::fromUtf8(datagram); // 用utf8解码
+        buf = QString::fromUtf8(datagram); // 用utf8解码]
+
+        // 要保存的文本
+        save_data.append(buf);
+        save_data += "\n";
         qDebug()<<"解码后："<<buf<<"\n";
 
         //获取当前时间并转化为固定格式 (年-月-日 小时:分钟:秒)
@@ -186,7 +191,7 @@ void MainWindow::recv_message()
     }
 }
 
-void MainWindow::save_message()
+void MainWindow::save_message(QString save_data)
 {// Excel默认情况下假定文件采用Windows ANSI编码，而不是UTF-8编码,因此中文会乱码
     QString currentPath = QDir::currentPath();
     QString title = "另存为一个文件";
@@ -203,9 +208,8 @@ void MainWindow::save_message()
     {
         QFile file(filename);
         file.open(QIODevice::WriteOnly|QIODevice::Text); // 确保文件以UTF8编码模式打开
-        QString receData = ui->ReceiveplainTextEdit->toPlainText();
-        QByteArray receData1 = receData.toUtf8();
-        file.write(receData1,receData1.length());
+        QByteArray save_data_1 = save_data.toUtf8();
+        file.write(save_data_1,save_data_1.length());
         QMessageBox::information(this,"提示","保存成功！");
         file.close();
     }
