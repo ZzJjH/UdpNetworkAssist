@@ -167,9 +167,8 @@ void MainWindow::recv_message()
         buf = QString::fromUtf8(datagram); // 用utf8解码]
 
         // 将接收的文本提取数值并保存在列表中
-        qDebug()<<buf;
+        //qDebug()<<buf;
         IMUData imuData = extract_data(buf);
-        qDebug()<<imuData.accx;
 
 
         //qDebug()<<"解码后："<<buf<<"\n";
@@ -177,6 +176,12 @@ void MainWindow::recv_message()
         //获取当前时间并转化为固定格式 (年-月-日 小时:分钟:秒)
         QDateTime currentTime = QDateTime::currentDateTime();
         QString Time = currentTime.toString("yyyy-MM-dd HH:mm:ss");
+        save_data = save_data +Time;
+        save_data = save_data +" " + imuData.accx + " " + imuData .accy + " " +imuData.accz
+                    + " " + imuData.x + " " + imuData.y + " " +imuData.z + " " + imuData.w
+                    + " " +imuData.gx + " " +imuData.gy + " " + imuData.gz;
+        save_data += "\n";
+        qDebug()<<save_data;
 
         //qDebug()<<"666"<<AimIP.toString()<<"666"<<QString::number(AimPort, 10);
         //666 "::ffff:192.168.137.1" 666 "56050"
