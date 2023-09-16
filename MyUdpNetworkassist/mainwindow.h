@@ -31,7 +31,7 @@ public:
     void send_message();
     void recv_message();
     void save_message(QString save_data);
-
+    void initExcel();
 
     struct IMUData {
         QString x;

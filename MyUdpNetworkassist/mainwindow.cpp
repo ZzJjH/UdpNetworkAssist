@@ -11,6 +11,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    initExcel();
     ui->cancel_bind_Btn->setEnabled(false);
 
     initCharts();
@@ -177,9 +178,9 @@ void MainWindow::recv_message()
         QDateTime currentTime = QDateTime::currentDateTime();
         QString Time = currentTime.toString("yyyy-MM-dd HH:mm:ss");
         save_data = save_data +Time;
-        save_data = save_data +" " + imuData.accx + " " + imuData .accy + " " +imuData.accz
-                    + " " + imuData.x + " " + imuData.y + " " +imuData.z + " " + imuData.w
-                    + " " +imuData.gx + " " +imuData.gy + " " + imuData.gz;
+        save_data = save_data +"\t" + imuData.accx + "\t" + imuData .accy + "\t" +imuData.accz
+                    + "\t" + imuData.x + "\t" + imuData.y + "\t" +imuData.z + "\t" + imuData.w
+                    + "\t" +imuData.gx + "\t" +imuData.gy + "\t" + imuData.gz;
         save_data += "\n";
         qDebug()<<save_data;
 
@@ -223,6 +224,14 @@ void MainWindow::save_message(QString save_data)
         QMessageBox::information(this,"提示","保存成功！");
         file.close();
     }
+}
+
+void MainWindow::initExcel()
+{
+    save_data = "imu\n";
+    save_data =save_data +"recv_time" +"\t" + "AccX" + "\t" + "AccY" +"\t" + "AccZ" +"\t" +
+                "W0" + "\t"+"W1" +"\t" + "W2" +"\t" + "W3" + "\t" +
+                "GyroX" + "\t"+"GyroY" +"\t" + "GyroZ" +"\n";
 }
 
 MainWindow::IMUData MainWindow::extract_data(const QString& jsonData)
