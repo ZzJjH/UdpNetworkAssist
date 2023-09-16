@@ -39,6 +39,8 @@ private slots:
 
     void RecvRate_slot();
 
+    void on_cancel_bind_Btn_clicked();
+
 private:
     Ui::MainWindow *ui;
     QUdpSocket* msocket;

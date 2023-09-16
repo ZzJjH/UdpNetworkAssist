@@ -11,6 +11,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    ui->cancel_bind_Btn->setEnabled(false);
 
     /* 1. 获取本机ip并显示 2. 设置输入端口只能为数字 */
     default_ip_port();
@@ -116,6 +117,7 @@ void MainWindow::port_bind()
         //绑定成功(“绑定”按钮设置为失效，“端口号”输入框设置为只读)
         ui->BindBtn->setEnabled(false);
         ui->PortlineEdit->setReadOnly(true);
+        ui->cancel_bind_Btn->setEnabled(true);
         QMessageBox::information(this,"提示","绑定成功！");
     }
     else
@@ -208,3 +210,13 @@ void MainWindow::save_message()
         file.close();
     }
 }
+
+void MainWindow::on_cancel_bind_Btn_clicked()
+{
+    msocket->close();
+    ui->BindBtn->setEnabled(true);
+    ui->PortlineEdit->setReadOnly(false);
+    ui->cancel_bind_Btn->setEnabled(false);
+    QMessageBox::information(this,"提示","取消绑定!");
+}
+
