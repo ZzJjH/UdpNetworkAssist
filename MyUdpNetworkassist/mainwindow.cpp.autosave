@@ -167,8 +167,9 @@ void MainWindow::recv_message()
         buf = QString::fromUtf8(datagram); // 用utf8解码]
 
         // 要保存的文本
-        save_data.append(buf);
-        save_data += "\n";
+        //        save_data.append(buf);
+        //        save_data += "\n";
+        qextract_data(buf);
         qDebug()<<"解码后："<<buf<<"\n";
 
         //获取当前时间并转化为固定格式 (年-月-日 小时:分钟:秒)
