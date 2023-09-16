@@ -13,6 +13,8 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     ui->cancel_bind_Btn->setEnabled(false);
 
+    initCharts();
+
     /* 1. 获取本机ip并显示 2. 设置输入端口只能为数字 */
     default_ip_port();
 
@@ -213,6 +215,42 @@ void MainWindow::save_message(QString save_data)
         QMessageBox::information(this,"提示","保存成功！");
         file.close();
     }
+}
+
+// 初始化图表
+void MainWindow::initCharts()
+{
+    // 1. 创建对象
+    chartView = new QtCharts::QChartView(this);
+    acc_Chart = new QtCharts::QChart;
+    m_axisX = new QtCharts::QValueAxis;
+    m_axisY = new QtCharts::QValueAxis;
+
+    // 2.设置横纵坐标
+    // 2.1 设置坐标轴名称和所属
+    m_axisX->setTitleText("时间");
+    m_axisY->setTitleText("加速度");
+    acc_Chart->addAxis(m_axisX,Qt::AlignBottom);
+    acc_Chart->addAxis(m_axisY,Qt::AlignLeft);
+
+    // 2.2 设置坐标轴名称字体样式
+    QFont font_x("黑体", 20);
+    m_axisX->setTitleFont(font_x);
+    QFont font_y("黑体", 20);
+    m_axisY->setTitleFont(font_y);
+
+    // 2.3. 设置坐标轴取值范围
+    m_axisX->setRange(0,100);
+    m_axisY->setRange(0,200);
+
+
+
+    // 3.画图
+    chartView->setChart(acc_Chart);
+    chartView->setGeometry(ui->ACCwidget->geometry());
+
+
+
 }
 
 void MainWindow::on_cancel_bind_Btn_clicked()

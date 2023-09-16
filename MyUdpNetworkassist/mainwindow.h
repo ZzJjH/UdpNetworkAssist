@@ -10,6 +10,13 @@
 #include<QFile>
 #include<QTimer>
 
+// 画图头文件
+#include <QChart>
+#include <QChartView>
+#include <QValueAxis>
+#include <QLineSeries>
+#include <QtMath>
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -24,6 +31,12 @@ public:
     void send_message();
     void recv_message();
     void save_message(QString save_data);
+
+    void initCharts();
+    QtCharts::QChartView *chartView;
+    QtCharts::QChart *acc_Chart;
+    QtCharts::QValueAxis *m_axisX, *m_axisY;
+    QtCharts::QLineSeries* accx_lineSeries;
 
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();

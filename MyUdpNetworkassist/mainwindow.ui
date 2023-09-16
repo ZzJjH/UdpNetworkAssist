@@ -147,13 +147,13 @@
      </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="widget" native="true">
+   <widget class="QWidget" name="ACCwidget" native="true">
     <property name="geometry">
      <rect>
-      <x>10</x>
+      <x>30</x>
       <y>220</y>
-      <width>391</width>
-      <height>331</height>
+      <width>400</width>
+      <height>320</height>
      </rect>
     </property>
    </widget>
