@@ -69,8 +69,6 @@ public:
 private slots:
     void on_BindBtn_clicked();
 
-    void on_SendBtn_clicked();
-
     void readyRead_Slot();
 
     void on_saveBtn_clicked();

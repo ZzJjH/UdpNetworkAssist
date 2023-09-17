@@ -51,11 +51,6 @@ void MainWindow::on_BindBtn_clicked()
 
 /*********************************************************************************************/
 
-/* 发送数据 */
-void MainWindow::on_SendBtn_clicked()
-{
-    send_message();
-}
 
 /**************************************************************************************/
 
@@ -133,16 +128,7 @@ void MainWindow::port_bind()
 
 }
 
-void MainWindow::send_message()
-{
-    // 获取目标端口号，IP，要发送的文本
-    int Aimport = ui->UdpPORTlineEdit->text().toInt();
-    QString Aimip = ui->UdpIPlineEdit->text();
-    QString sendText = ui->SendtextEdit->toPlainText();
 
-    //用utf8编码
-    msocket->writeDatagram(sendText.toUtf8(),QHostAddress(Aimip),Aimport);
-}
 
 void MainWindow::recv_message()
 {
@@ -311,17 +297,24 @@ void MainWindow::initCharts()
 
     // 3.显示坐标轴
     chartView->setChart(acc_Chart);
-    //chartView->setGeometry(ui->ACCview);
-    int x = ui->ACCview->x();
-    int y = ui->ACCview->y();
-    int width = ui->ACCview->width();
-    int height = ui->ACCview->height();
-    chartView->setGeometry(x, y, width, height);
+    chartView->setParent(ui->ACCview);
 
-    // 4. 设置曲线参数
+    // 4. 设置图居中布置在预定位置
+    // 4.1 创建一个垂直布局管理器
+    QVBoxLayout *layout = new QVBoxLayout(ui->ACCview); // 假设centralWidget是父控件
+    // 4.2 添加ACCview和chartView到布局
+    layout->addWidget(ui->ACCview);
+    layout->addWidget(chartView);
+    // 4.3 设置对齐方式使其水平和垂直居中
+    ui->ACCview->setAlignment(Qt::AlignCenter);
+    chartView->setAlignment(Qt::AlignCenter);
+
+    chartView->setGeometry(ui->ACCview->geometry());
+
+    // 5. 设置曲线参数
     QPen pen;
     pen.setWidth(0.5);
-    pen.setColor(Qt::black);  // 设置线条颜色
+    pen.setColor(Qt::red);  // 设置线条颜色
     pen.setStyle(Qt::SolidLine);  // 设置线条样式为实线
 
     accx_lineSeries = new QLineSeries();
