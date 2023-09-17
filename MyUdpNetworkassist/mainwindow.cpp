@@ -293,19 +293,28 @@ void MainWindow::initCharts()
     m_axisX->setRange(0,100);
     m_axisY->setRange(0,200);
 
-
-
-    // 3.画图
+    // 3.显示坐标轴
     chartView->setChart(acc_Chart);
     //chartView->setGeometry(ui->ACCview);
-
     int x = ui->ACCview->x();
     int y = ui->ACCview->y();
     int width = ui->ACCview->width();
     int height = ui->ACCview->height();
     chartView->setGeometry(x, y, width, height);
 
+    // 4. 设置曲线参数
+    QPen pen;
+    pen.setWidth(0.5);
+    pen.setColor(Qt::black);  // 设置线条颜色
+    pen.setStyle(Qt::SolidLine);  // 设置线条样式为实线
 
+    accx_lineSeries = new QLineSeries();
+    accx_lineSeries->setPen(pen);
+    accx_lineSeries->setPointsVisible(false);                         // 设置数据点可见
+    accx_lineSeries->setName("加速度");
+    acc_Chart->addSeries(accx_lineSeries);
+    accx_lineSeries->attachAxis(m_axisX);                             // 曲线对象关联上X轴，此步骤必须在m_chart->addSeries之后
+    accx_lineSeries->attachAxis(m_axisY);
 
 }
 
