@@ -173,6 +173,12 @@ void MainWindow::recv_message()
         //qDebug()<<buf;
         IMUData imuData = extract_data(buf);
 
+        // 判断当前接收数据的数量是否超过指定值 以更新横坐标 实现实时滚动
+        if (pointNum > AXIS_X){
+            accx_lineSeries->remove(0);
+            acc_Chart->axisX()->setMin(pointNum - AXIS_X);
+            acc_Chart->axisX()->setMax(pointNum);
+        }
         //画accx
         QString accx_str = imuData.accx;
         float accx_flo = accx_str.toFloat();
@@ -298,8 +304,10 @@ void MainWindow::initCharts()
     m_axisY->setTitleFont(font_y);
 
     // 2.3. 设置坐标轴取值范围
-    m_axisX->setRange(0,1000);
-    m_axisY->setRange(-5,5);
+//    m_axisX->setRange(0,AXIS_X);
+    m_axisY->setRange(-AXIS_Y,AXIS_Y);
+    m_axisX->setMin(0);
+    m_axisX->setMax(AXIS_X);
 
     // 3.显示坐标轴
     chartView->setChart(acc_Chart);
@@ -319,7 +327,7 @@ void MainWindow::initCharts()
     accx_lineSeries = new QLineSeries();
     accx_lineSeries->setPen(pen);
     accx_lineSeries->setPointsVisible(false);                         // 设置数据点可见
-    accx_lineSeries->setName("加速度");
+    accx_lineSeries->setName("accX");
     acc_Chart->addSeries(accx_lineSeries);
     accx_lineSeries->attachAxis(m_axisX);                             // 曲线对象关联上X轴，此步骤必须在m_chart->addSeries之后
     accx_lineSeries->attachAxis(m_axisY);

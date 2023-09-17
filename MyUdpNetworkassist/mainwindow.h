@@ -56,6 +56,8 @@ public:
     QChartView *chartView;
     QChart *acc_Chart;
     QValueAxis *m_axisX, *m_axisY;
+    const float AXIS_Y = 5.0;
+    const int AXIS_X = 1000;
     QLineSeries* accx_lineSeries;
     int pointNum = 0;
 
