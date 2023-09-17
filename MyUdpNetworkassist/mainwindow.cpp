@@ -46,6 +46,8 @@ void MainWindow::on_BindBtn_clicked()
 {
     port_bind();
     accx_lineSeries->clear();
+    accy_lineSeries->clear();
+    accz_lineSeries->clear();
     pointNum = 0;
 }
 
@@ -171,8 +173,15 @@ void MainWindow::recv_message()
         accx_lineSeries->append(QPointF(pointNum, accx_flo));
         pointNum++;
 
+        //画accy
+        QString accy_str = imuData.accy;
+        float accy_flo = accy_str.toFloat();
+        accy_lineSeries->append(QPointF(pointNum, accy_flo));
 
-        //qDebug()<<"解码后："<<buf<<"\n";
+        //画accx
+        QString accz_str = imuData.accz;
+        float accz_flo = accz_str.toFloat();
+        accz_lineSeries->append(QPointF(pointNum, accz_flo));
 
         //获取当前时间并转化为固定格式 (年-月-日 小时:分钟:秒)
         QDateTime currentTime = QDateTime::currentDateTime();
@@ -312,18 +321,41 @@ void MainWindow::initCharts()
     chartView->setGeometry(ui->ACCview->geometry());
 
     // 5. 设置曲线参数
-    QPen pen;
-    pen.setWidth(0.5);
-    pen.setColor(Qt::red);  // 设置线条颜色
-    pen.setStyle(Qt::SolidLine);  // 设置线条样式为实线
-
+    QPen pen_accx;
+    pen_accx.setWidth(0.5);
+    pen_accx.setColor(Qt::red);  // 设置线条颜色
+    pen_accx.setStyle(Qt::SolidLine);  // 设置线条样式为实线
     accx_lineSeries = new QLineSeries();
-    accx_lineSeries->setPen(pen);
+    accx_lineSeries->setPen(pen_accx);
     accx_lineSeries->setPointsVisible(false);                         // 设置数据点可见
     accx_lineSeries->setName("accX");
     acc_Chart->addSeries(accx_lineSeries);
     accx_lineSeries->attachAxis(m_axisX);                             // 曲线对象关联上X轴，此步骤必须在m_chart->addSeries之后
     accx_lineSeries->attachAxis(m_axisY);
+
+    QPen pen_accy;
+    pen_accy.setWidth(0.5);
+    pen_accy.setColor(Qt::blue);  // 设置线条颜色
+    pen_accy.setStyle(Qt::SolidLine);  // 设置线条样式为实线
+    accy_lineSeries = new QLineSeries();
+    accy_lineSeries->setPen(pen_accy);
+    accy_lineSeries->setPointsVisible(false);                         // 设置数据点可见
+    accy_lineSeries->setName("accY");
+    acc_Chart->addSeries(accy_lineSeries);
+    accy_lineSeries->attachAxis(m_axisX);                             // 曲线对象关联上X轴，此步骤必须在m_chart->addSeries之后
+    accy_lineSeries->attachAxis(m_axisY);
+
+    QPen pen_accz;
+    pen_accz.setWidth(0.5);
+    pen_accz.setColor(Qt::green);  // 设置线条颜色
+    pen_accz.setStyle(Qt::SolidLine);  // 设置线条样式为实线
+    accz_lineSeries = new QLineSeries();
+    accz_lineSeries->setPen(pen_accz);
+    accz_lineSeries->setPointsVisible(false);                         // 设置数据点可见
+    accz_lineSeries->setName("accZ");
+    acc_Chart->addSeries(accz_lineSeries);
+    accz_lineSeries->attachAxis(m_axisX);                             // 曲线对象关联上X轴，此步骤必须在m_chart->addSeries之后
+    accz_lineSeries->attachAxis(m_axisY);
 
 }
 

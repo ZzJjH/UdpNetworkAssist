@@ -9,3 +9,5 @@ int main(int argc, char *argv[])
     w.show();
     return a.exec();
 }
+
+//头文件QLineSeries* accx_lineSeries;
