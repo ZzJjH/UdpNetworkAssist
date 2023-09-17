@@ -57,6 +57,7 @@ public:
     QChart *acc_Chart;
     QValueAxis *m_axisX, *m_axisY;
     QLineSeries* accx_lineSeries;
+    int pointNum = 0;
 
 
 

@@ -45,6 +45,8 @@ MainWindow::~MainWindow()
 void MainWindow::on_BindBtn_clicked()
 {
     port_bind();
+    accx_lineSeries->clear();
+    pointNum = 0;
 }
 
 /*********************************************************************************************/
@@ -171,6 +173,12 @@ void MainWindow::recv_message()
         //qDebug()<<buf;
         IMUData imuData = extract_data(buf);
 
+        //画accx
+        QString accx_str = imuData.accx;
+        float accx_flo = accx_str.toFloat();
+        accx_lineSeries->append(QPointF(pointNum, accx_flo));
+        pointNum++;
+
 
         //qDebug()<<"解码后："<<buf<<"\n";
 
@@ -290,8 +298,8 @@ void MainWindow::initCharts()
     m_axisY->setTitleFont(font_y);
 
     // 2.3. 设置坐标轴取值范围
-    m_axisX->setRange(0,100);
-    m_axisY->setRange(0,200);
+    m_axisX->setRange(0,1000);
+    m_axisY->setRange(-0.1,-0.1);
 
     // 3.显示坐标轴
     chartView->setChart(acc_Chart);
