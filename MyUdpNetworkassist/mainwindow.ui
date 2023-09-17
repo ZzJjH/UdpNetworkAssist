@@ -2,12 +2,15 @@
 <ui version="4.0">
  <class>MainWindow</class>
  <widget class="QMainWindow" name="MainWindow">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>742</width>
-    <height>553</height>
+    <width>988</width>
+    <height>618</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,13 +23,64 @@
       <x>10</x>
       <y>10</y>
       <width>131</width>
-      <height>201</height>
+      <height>301</height>
      </rect>
     </property>
     <property name="title">
      <string>网络设置</string>
     </property>
     <layout class="QGridLayout" name="gridLayout">
+     <item row="4" column="0">
+      <widget class="QLineEdit" name="PortlineEdit"/>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="label_3">
+       <property name="text">
+        <string>本地端口号:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="8" column="0">
+      <widget class="QLabel" name="recv_speed">
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="text">
+        <string>recv_speed</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLineEdit" name="IPlineEdit">
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>本地IP地址:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="0">
+      <widget class="QPushButton" name="cancel_bind_Btn">
+       <property name="text">
+        <string>取消绑定</string>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="0">
+      <widget class="QPushButton" name="saveBtn">
+       <property name="text">
+        <string>保存</string>
+       </property>
+      </widget>
+     </item>
      <item row="0" column="0">
       <widget class="QLabel" name="label">
        <property name="text">
@@ -41,103 +95,69 @@
        </property>
       </widget>
      </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="label_2">
+     <item row="9" column="0">
+      <widget class="QLabel" name="totalByte">
        <property name="text">
-        <string>本地IP地址:</string>
+        <string>总接收字节数：</string>
        </property>
-      </widget>
-     </item>
-     <item row="3" column="0">
-      <widget class="QLabel" name="label_3">
-       <property name="text">
-        <string>本地端口号:</string>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="0">
-      <widget class="QLineEdit" name="PortlineEdit"/>
-     </item>
-     <item row="2" column="0">
-      <widget class="QLineEdit" name="IPlineEdit">
-       <property name="readOnly">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="6" column="0">
-      <widget class="QPushButton" name="cancel_bind_Btn">
-       <property name="text">
-        <string>取消绑定</string>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
        </property>
       </widget>
      </item>
     </layout>
-   </widget>
-   <widget class="QLabel" name="recv_speed">
-    <property name="geometry">
-     <rect>
-      <x>40</x>
-      <y>220</y>
-      <width>65</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>recv_speed</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="totalByte">
-    <property name="geometry">
-     <rect>
-      <x>30</x>
-      <y>250</y>
-      <width>84</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>总接收字节数：</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="saveBtn">
-    <property name="geometry">
-     <rect>
-      <x>30</x>
-      <y>280</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>保存</string>
-    </property>
    </widget>
    <widget class="QChartView" name="ACCview">
     <property name="geometry">
      <rect>
       <x>150</x>
       <y>10</y>
-      <width>581</width>
-      <height>441</height>
+      <width>821</width>
+      <height>501</height>
      </rect>
     </property>
     <property name="layoutDirection">
      <enum>Qt::LeftToRight</enum>
     </property>
    </widget>
-   <widget class="QPlainTextEdit" name="ReceiveplainTextEdit">
+   <widget class="QWidget" name="widget" native="true">
     <property name="geometry">
      <rect>
-      <x>150</x>
-      <y>460</y>
-      <width>581</width>
-      <height>41</height>
+      <x>20</x>
+      <y>510</y>
+      <width>961</width>
+      <height>61</height>
      </rect>
     </property>
-    <property name="readOnly">
-     <bool>false</bool>
-    </property>
+    <widget class="QLabel" name="label_4">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>30</y>
+       <width>91</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>接收数据显示</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QPlainTextEdit" name="ReceiveplainTextEdit">
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>20</y>
+       <width>821</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="readOnly">
+      <bool>false</bool>
+     </property>
+    </widget>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -145,7 +165,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>742</width>
+     <width>988</width>
      <height>21</height>
     </rect>
    </property>
