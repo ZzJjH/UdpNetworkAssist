@@ -299,7 +299,7 @@ void MainWindow::initCharts()
 
     // 2.3. 设置坐标轴取值范围
     m_axisX->setRange(0,1000);
-    m_axisY->setRange(-0.1,-0.1);
+    m_axisY->setRange(-5,5);
 
     // 3.显示坐标轴
     chartView->setChart(acc_Chart);
