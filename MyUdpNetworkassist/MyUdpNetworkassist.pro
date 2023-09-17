@@ -1,5 +1,5 @@
 QT       += core gui network
-QT       += core charts
+QT       += charts
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++17

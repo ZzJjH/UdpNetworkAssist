@@ -16,6 +16,8 @@
 #include <QValueAxis>
 #include <QLineSeries>
 #include <QtMath>
+#include <QSplineSeries>
+QT_CHARTS_USE_NAMESPACE
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -49,11 +51,14 @@ public:
     };
     IMUData extract_data(const QString& jsonData);
 
+    //TEMP
     void initCharts();
-    QtCharts::QChartView *chartView;
-    QtCharts::QChart *acc_Chart;
-    QtCharts::QValueAxis *m_axisX, *m_axisY;
-    QtCharts::QLineSeries* accx_lineSeries;
+    QChartView *chartView;
+    QChart *acc_Chart;
+    QValueAxis *m_axisX, *m_axisY;
+    QLineSeries* accx_lineSeries;
+
+
 
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();

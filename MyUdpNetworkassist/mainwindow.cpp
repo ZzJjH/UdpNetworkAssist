@@ -271,10 +271,10 @@ MainWindow::IMUData MainWindow::extract_data(const QString& jsonData)
 void MainWindow::initCharts()
 {
     // 1. 创建对象
-    chartView = new QtCharts::QChartView(this);
-    acc_Chart = new QtCharts::QChart;
-    m_axisX = new QtCharts::QValueAxis;
-    m_axisY = new QtCharts::QValueAxis;
+    chartView = new QChartView(ui->ACCview);
+    acc_Chart = new QChart;
+    m_axisX = new QValueAxis;
+    m_axisY = new QValueAxis;
 
     // 2.设置横纵坐标
     // 2.1 设置坐标轴名称和所属
@@ -297,11 +297,20 @@ void MainWindow::initCharts()
 
     // 3.画图
     chartView->setChart(acc_Chart);
-    chartView->setGeometry(ui->ACCwidget->geometry());
+    //chartView->setGeometry(ui->ACCview);
+
+    int x = ui->ACCview->x();
+    int y = ui->ACCview->y();
+    int width = ui->ACCview->width();
+    int height = ui->ACCview->height();
+    chartView->setGeometry(x, y, width, height);
 
 
 
 }
+
+
+
 
 void MainWindow::on_cancel_bind_Btn_clicked()
 {

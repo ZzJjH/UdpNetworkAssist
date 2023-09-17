@@ -80,82 +80,143 @@
       <x>140</x>
       <y>10</y>
       <width>551</width>
-      <height>511</height>
+      <height>551</height>
      </rect>
     </property>
     <property name="title">
      <string>网络数据接收</string>
     </property>
-    <layout class="QGridLayout" name="gridLayout_2">
-     <item row="0" column="0" colspan="5">
-      <widget class="QPlainTextEdit" name="ReceiveplainTextEdit">
-       <property name="readOnly">
-        <bool>false</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="recv_speed">
-       <property name="text">
-        <string>recv_speed</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="2" colspan="2">
-      <widget class="QLabel" name="totalByte">
-       <property name="text">
-        <string>总接收字节数：</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="4">
-      <widget class="QPushButton" name="saveBtn">
-       <property name="text">
-        <string>保存</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="0">
-      <widget class="QLabel" name="label_4">
-       <property name="text">
-        <string>目标IP地址：</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="1">
-      <widget class="QLineEdit" name="UdpIPlineEdit"/>
-     </item>
-     <item row="2" column="2">
-      <widget class="QLabel" name="label_5">
-       <property name="text">
-        <string>目标端口号：</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="3" colspan="2">
-      <widget class="QLineEdit" name="UdpPORTlineEdit"/>
-     </item>
-     <item row="3" column="0" colspan="4">
-      <widget class="QTextEdit" name="SendtextEdit"/>
-     </item>
-     <item row="3" column="4">
-      <widget class="QPushButton" name="SendBtn">
-       <property name="text">
-        <string>发送</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
-   <widget class="QWidget" name="ACCwidget" native="true">
-    <property name="geometry">
-     <rect>
-      <x>30</x>
-      <y>220</y>
-      <width>400</width>
-      <height>320</height>
-     </rect>
-    </property>
+    <widget class="QPlainTextEdit" name="ReceiveplainTextEdit">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>380</y>
+       <width>531</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="readOnly">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="recv_speed">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>440</y>
+       <width>65</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>recv_speed</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="totalByte">
+     <property name="geometry">
+      <rect>
+       <x>280</x>
+       <y>440</y>
+       <width>84</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>总接收字节数：</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="saveBtn">
+     <property name="geometry">
+      <rect>
+       <x>460</x>
+       <y>440</y>
+       <width>75</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>保存</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_4">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>470</y>
+       <width>71</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>目标IP地址：</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="UdpIPlineEdit">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>470</y>
+       <width>133</width>
+       <height>21</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_5">
+     <property name="geometry">
+      <rect>
+       <x>230</x>
+       <y>470</y>
+       <width>72</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>目标端口号：</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="UdpPORTlineEdit">
+     <property name="geometry">
+      <rect>
+       <x>310</x>
+       <y>470</y>
+       <width>133</width>
+       <height>21</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QTextEdit" name="SendtextEdit">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>500</y>
+       <width>461</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="SendBtn">
+     <property name="geometry">
+      <rect>
+       <x>470</x>
+       <y>510</y>
+       <width>75</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>发送</string>
+     </property>
+    </widget>
+    <widget class="QChartView" name="ACCview">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>20</y>
+       <width>361</width>
+       <height>331</height>
+      </rect>
+     </property>
+    </widget>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -170,6 +231,13 @@
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QChartView</class>
+   <extends>QGraphicsView</extends>
+   <header location="global">qchartview.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
